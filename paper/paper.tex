@@ -1,0 +1,435 @@
+\documentclass[sigconf,letterpaper]{acmart}
+%\documentclass[sigconf,anonymous]{acmart}
+%\documentclass[sigconf, anonymous, review]{acmart}
+%\documentclass[10pt,sigconf,anonymous]{acmart}
+
+%%
+%% \BibTeX command to typeset BibTeX logo in the docs
+\AtBeginDocument{%
+  \providecommand\BibTeX{{%
+    \normalfont B\kern-0.5em{\scshape i\kern-0.25em b}\kern-0.8em\TeX}}}
+
+%% Rights management information.  This information is sent to you
+%% when you complete the rights form.  These commands have SAMPLE
+%% values in them; it is your responsibility as an author to replace
+%% the commands and values with those provided to you when you
+%% complete the rights form.
+% Copyright
+%\renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference info
+%\setcopyright{none}
+%\acmConference{The Web Conference 2020}{April 20-24, 2019}{Taipei}
+%\acmConference{}{}{}
+
+%\setcopyright{acmcopyright}
+%\copyrightyear{2018}
+%\acmYear{2018}
+%\acmDOI{10.1145/1122445.1122456}
+
+%% These commands are for a PROCEEDINGS abstract or paper.
+%\acmConference[Woodstock '18]{Woodstock '18: ACM Symposium on Neural
+%  Gaze Detection}{June 03--05, 2018}{Woodstock, NY}
+%\acmBooktitle{Woodstock '18: ACM Symposium on Neural Gaze Detection,
+%  June 03--05, 2018, Woodstock, NY}
+%\acmPrice{15.00}
+%\acmISBN{978-1-4503-9999-9/18/06}
+
+
+%%% printfolios = false -> removes page numbers %%%
+\settopmatter{printacmref=false, printccs=false, printfolios=false}
+
+
+\usepackage{balance}
+
+
+%\fancyhf{} % Remove fancy page headers 
+%\fancyhead[C]{Anonymous submission \#9999 to ACM CCS 2019} % TODO: replace 9999 with your paper number
+%\fancyfoot[C]{\thepage}
+%\fancyfoot{}
+
+%\usepackage{lastpage}
+
+%\usepackage{cleveref}
+
+\renewcommand{\topfraction}{1}
+\renewcommand{\dbltopfraction}{1}
+\renewcommand{\floatpagefraction}{1}
+\renewcommand{\dblfloatpagefraction}{1}
+\renewcommand{\textfraction}{0}
+\usepackage{stfloats}
+
+\newcommand{\ie}{i.e., \@}
+\newcommand{\eg}{e.g., \@}
+\newcommand{\Ie}{I.e., \@}
+\newcommand{\Eg}{E.g., \@}
+\newcommand{\cf}{cf. \@}
+\newcommand{\Cf}{Cf. \@}
+\newcommand{\etc}{etc. \@}
+\newcommand{\perc}{\,\%}
+\newcommand{\hn}[1]{\textsl{\textbf{#1}\mbox{}}}
+\newcommand{\etal}{et al.}
+
+%
+\newcommand{\eat}[1]{}
+\newcommand{\todo}[1]{\textcolor{red}{TODO: \emph{#1}}}
+\newcommand{\nlnote}[1]{\textcolor{fashionfuchsia}{\small \bf [NL: #1]}} %Laoutaris
+\newcommand{\gsnote}[1]{\textcolor{blue}{\small \bf [GS: #1]}}
+\newcommand{\colorcell}{\cellcolor{blue!20}}
+\newcommand{\srdjan}[1]{\noindent{\color{blue}{\bf \fbox{srj}} {\it#1}} }
+\newcommand{\nikos}[1]{\noindent{\color{red}{\bf \fbox{nik}} {\it#1}} }
+\newcommand{\cinote}[1]{\noindent{\color{orange}{\bf \fbox{cos}} {\it#1}} }
+\newcommand{\updateme}[1]{\noindent{\color{red}{\bf \fbox{UPDATE ME!}} {\it#1}} }
+\newcommand{\workinprogres}{\noindent{\Large{\color{magenta}{WORK IN PROGRESS. DO NOT EDIT THE SECTION FROM THIS POINT ON.}}}}
+%
+\newcommand{\new}[1]{\noindent{\color{orange}{\bf \fbox{NEW}} {\it#1}}}
+\newcommand{\curlie}[1]{Curlie}
+\newcommand{\curliedotorg}{\url{http://curlie.org}}
+\newcommand{\web}{Web}
+\newcommand{\webpage}{web page}
+\newcommand{\webpages}{web pages}
+\newcommand{\website}{web site}
+\newcommand{\websites}{web sites}
+\newcommand{\overfittedclassifier}{ba\-se\-li\-ne cla\-s\-si\-fier}  %{\textcolor{red}{groundtruth classifier}}
+\newcommand{\balancedclassifier}{ba\-la\-nced cla\-s\-si\-fier} %{\textcolor{red}{groundtruth-expanded classifier}}
+\newcommand{\curlieurls}{1,525,865}
+\newcommand{\curliecategories}{344,227}
+\newcommand{\curliedomains}{1,137,997}
+\newcommand{\curliedomainsmultipleurls}{43,839} % or 44,390???
+\newcommand{\customcheckmark}{\ding{52}}
+
+\newcommand{\afblock}[1]{\noindent{\textbf{#1}}} 
+
+
+%%%
+\newcommand{\fra}{\tt CE1}
+\newcommand{\dus}{\tt CE2}
+\newcommand{\ham}{\tt CE3}
+\newcommand{\muc}{\tt CE4}
+\newcommand{\nyc}{\tt NA1}
+\newcommand{\dfw}{\tt NA2}
+\newcommand{\mad}{\tt SE1}
+\newcommand{\mrs}{\tt SE2}
+\newcommand{\lis}{\tt SE3}
+\newcommand{\ist}{\tt SE4}
+\newcommand{\pmo}{\tt SE5}
+%%%
+
+\newif\iflatexdiff\latexdifftrue
+\latexdifffalse
+
+\newif\ifrevisionlog\revisionlogtrue 
+\revisionlogfalse
+
+\iflatexdiff
+	\usepackage{pdfpages}
+\fi
+
+\ifrevisionlog
+	\include{revisionnotes-preamble}
+\fi
+
+
+\usepackage[normalem]{ulem}
+% Srdjan: package conflict issue with symbols on Linux; had to add those two lines.
+\usepackage{savesym}
+\savesymbol{Bbbk}
+\usepackage{tabularx}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+\usepackage{graphicx}
+%\usepackage{subfig}
+\usepackage{float}
+%\usepackage{subfig}
+\usepackage{enumitem}
+\setlist{nolistsep}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{grffile}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{multicol,multirow}
+\usepackage{rotating,url}
+\usepackage{enumitem}
+\usepackage{color}
+\usepackage{xspace}
+\usepackage{ifpdf}
+\usepackage{mdwlist}
+\usepackage{colortbl}
+\usepackage{caption}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{xfrac}
+\usepackage{afterpage}% http://ctan.org/pkg/afterpage
+\usepackage{pdflscape}
+\usepackage{longtable}
+\usepackage{hhline}
+\usepackage{lscape}
+\usepackage{pifont}
+% \usepackage{times}
+% \usepackage{authblk}
+% \usepackage{cite}
+\usepackage{subfigure}
+%\usepackage{subcaption}
+% \usepackage{tikz}
+% \usetikzlibrary{trees}
+\usepackage{verbatim}
+% \usepackage[keeplastbox]{flushend}
+% \usepackage{algorithm}
+% \usepackage[noend]{algorithmic}
+% \usepackage{subfigure}
+% \usepackage[caption=false]{subfig}
+% \usepackage{subcaption}
+% \usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+% Added by Costas
+% \usepackage{subcaption}
+% \usepackage{xcolor}
+\usepackage{arydshln} % dashed lines in tables
+
+
+%% To avoid broken URLs error. Remember to remove before submission 
+\hypersetup{draft}
+
+%%
+%% Submission ID.
+%% Use this when submitting an article to a sponsored event. You'll
+%% receive a unique submission ID from the organizers
+%% of the event, and this ID should be used as the parameter to this command.
+%%\acmSubmissionID{123-A56-BU3}
+
+%%
+%% The majority of ACM publications use numbered citations and
+%% references.  The command \citestyle{authoryear} switches to the
+%% "author year" style.
+%%
+%% If you are preparing content for an event
+%% sponsored by ACM SIGGRAPH, you must use the "author year" style of
+%% citations and references.
+%% Uncommenting
+%% the next command will enable that style.
+%%\citestyle{acmauthoryear}
+
+\fancyhead{}
+
+%%
+%% end of the preamble, start of the body of the document source.
+
+
+%%%%% Permission Release %%%%%
+%\copyrightyear{2021}
+%\acmYear{2021}
+%\setcopyright{rightsretained}
+%\acmConference[CCS '21] {Proceedings of the 2021 ACM SIGSAC Conference on Computer and Communications %Security}{November 15--19, 2021}{Virtual Event, Republic of Korea.}
+%\acmBooktitle{Proceedings of the 2021 ACM SIGSAC Conference on Computer and Communications Security (CCS %'21), November 15--19, 2021, Virtual Event, Republic of Korea}
+%\acmPrice{}
+%\acmISBN{978-1-4503-8454-4/21/11}
+%\acmDOI{10.1145/3460120.3485385}
+% Authors, replace the red X's with your assigned DOI string during the rightsreview eform process.
+%
+\settopmatter{printacmref=false}
+\begin{document}
+%\fancyhead{}
+%%%%%%%%%%%%%%%%%
+
+
+
+
+%%
+%% The "title" command has an optional parameter,
+%% allowing the author to define a "short title" to be used in page headers.
+\title{Anatomy of a National Scrubbing Center}
+\subtitle{Paper \#XXX}
+%, \pageref{page:end_of_main_body} pages body, \pageref{page:last} pages total}
+
+%%
+%% The "author" command and its associated commands are used to define
+%% the authors and their affiliations.
+%% Of note is the shared affiliation of the first two authors, and the
+%% "authornote" and "authornotemark" commands
+%% used to denote shared contribution to the research.
+
+% \author{First Second}
+% \authornote{Both authors contributed equally to this research.}
+% \email{trovato@corporation.com}
+% \orcid{1234-5678-9012}
+% \author{G.K.M. Tobin}
+% \authornotemark[1]
+% \email{webmaster@marysville-ohio.com}
+% \affiliation{%
+%   \institution{Institute for Clarity in Documentation}
+%   \streetaddress{P.O. Box 1212}
+%   \city{Dublin}
+%   \state{Ohio}
+%   \postcode{43017-6221}
+% }
+
+%\author{Paper \#XXX}
+
+%\author{First Second}
+%\affiliation{%
+%  \institution{The Th{\o}rv{\"a}ld Group}
+%}
+%\email{second@affiliation.org}
+%\author{First1 Second1}
+%\affiliation{%
+%  \institution{Inria Paris-Rocquencourt}
+%}
+%\email{second2@affiliation.org}
+
+%%
+%% By default, the full list of authors will be used in the page
+%% headers. Often, this list is too long, and will overlap
+%% other information printed in the page headers. This command allows
+%% the author to define a more concise list
+%% of authors' names for this purpose.
+
+%\author{Name}
+ %\affiliation{
+% 	\institution{Institute}
+ %}
+
+
+
+%\renewcommand{\shortauthors}{} %Trovato and Tobin, et al.}
+
+%%
+%% The abstract is a short summary of the work to be presented in the
+%% article.
+
+% Disable / remove copyright boxes -- Do not move it upwards
+\setcopyright{none}
+\settopmatter{printacmref=false, printccs=false, printfolios=false}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+\pagestyle{plain}
+\acmConference{}{}{}
+\renewcommand{\shortauthors}{}
+
+
+
+\input{sections/abstract}
+
+%\begin{CCSXML}
+%<ccs2012>
+%<concept>
+%<concept_id>10002978.10003014</concept_id>
+%<concept_desc>Security and privacy~Network security</concept_desc>
+%<concept_significance>500</concept_significance>
+%</concept>
+%</ccs2012>
+%\end{CCSXML}
+
+%\ccsdesc[500]{Security and privacy~Network security}
+%\keywords{Cyberattacks, DDoS, amplification attacks, IXP}
+
+%% The code below is generated by the tool at http://dl.acm.org/ccs.cfm.
+%% Please copy and paste the code instead of the example below.
+%\begin{CCSXML}
+%<ccs2012>
+% <concept>
+%  <concept_id>10010520.10010553.10010562</concept_id>
+%  <concept_desc>Computer systems organization~Embedded systems</concept_desc>
+%  <concept_significance>500</concept_significance>
+% </concept>
+% <concept>
+%  <concept_id>10010520.10010575.10010755</concept_id>
+%  <concept_desc>Computer systems organization~Redundancy</concept_desc>
+%  <concept_significance>300</concept_significance>
+% </concept>
+% <concept>
+%  <concept_id>10010520.10010553.10010554</concept_id>
+%  <concept_desc>Computer systems organization~Robotics</concept_desc>
+%  <concept_significance>100</concept_significance>
+% </concept>
+% <concept>
+%  <concept_id>10003033.10003083.10003095</concept_id>
+%  <concept_desc>Networks~Network reliability</concept_desc>
+%  <concept_significance>100</concept_significance>
+% </concept>
+%</ccs2012>
+%\end{CCSXML}
+%
+%\ccsdesc[500]{Computer systems organization~Embedded systems}
+%\ccsdesc[300]{Computer systems organization~Redundancy}
+%\ccsdesc{Computer systems organization~Robotics}
+%\ccsdesc[100]{Networks~Network reliability}
+
+%%
+%% Keywords. The author(s) should pick words that accurately describe
+%% the work being presented. Separate the keywords with commas.
+%\keywords{datasets, neural networks, gaze detection, text tagging}
+
+%%
+%% This command processes the author and affiliation and title
+%% information and builds the first part of the formatted document.
+\maketitle
+
+\input{sections/introduction}
+\input{sections/datasets}
+\input{sections/discussion}
+\input{sections/analysis}
+\input{sections/conclusion}
+
+%\input{sections/datasets}
+%\input{sections/ethics}
+%\input{sections/anatomy}
+%\section{Data Sets and Detection Approach}
+%\input{sections/detection}
+%\input{sections/characterization-challenges}
+%\input{sections/characterization-opportunities}
+%\input{sections/characterization-ixp}
+%\section{How Distributed are DDoS Attacks?}
+%\section{Distributed Sensing of DDoS Attacks}
+%\input{sections/setting}
+%\input{sections/characterization-attacks}
+%\input{sections/early-detection}
+%\input{sections/mitigation}
+%\input{sections/related}
+
+
+%\input{sections/acknowledgements}
+
+%%
+%% The next two lines define the bibliography style to be used, and
+%% the bibliography file.
+%\bibliographystyle{acm}
+\balance
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{paper}
+
+
+
+%%%%% APPENDIX %%%%%%%
+%\clearpage %Force appendix in a new page after references
+%\section*{Appendix}
+%\appendix
+%\setcounter{secnumdepth}{0}
+%\section{Appendix} \label{sec:appendix}
+
+%\input{sections/feature-set}
+%\input{sections/boosting-factor}
+
+
+
+
+%\label{page:last}
+
+
+ \ifrevisionlog
+ 	\newpage
+ 	\include{revisionnotes}
+ \fi
+ 
+% \iflatexdiff
+% 	\newpage
+% 	\includepdf[pages=-]{diff.pdf}%
+% \fi
+
+
+\end{document}
+\endinput
+
+%%% Local Variables:
+%%% TeX-master: "paper"
+%%% End:
+

@@ -1,0 +1,35 @@
+\section{Scrubbing Center Datasets}\label{sec:datasets}
+
+
+\subsection{Scrubbing Center Profile}
+
+
+\subsection{Network and Attack Datasets}
+
+We have two datasets from NBIP:
+
+Feb 2022 - Jun 2022: 1400 attacks in sflow format, the sampling rate is between 1:8129 and 1:64000. We used DDoS Dissector to analyze these and get the corresponding fingerprints.
+
+%> Do you think we can ask Pim for the data between Jun 2022-Sep 2022, e.g.,
+%> NBIP reports, so we do not have a gap. Should we also ask Pim for data from
+%> February 2023 and later, e.g., until end of 2023?
+%I think we can ask, getting the data should be straight forward for them since
+%they have a database with all the entries. I think the most interesting period
+%would be Jun 2022 - Jun 2023, covering before and after the takedowns.
+
+Sep 2022 - Feb 2023: NBIP reports, they don't collect sflows unless needed so they sent us their reports which are similar to the DDoS Dissector fingerprints but with less information.
+
+% > Do you think that we should cover both or only focus on the NBIP reports
+% (Sep 2022-later)?
+%The NBIP reports are more reliable since they create them with the full
+%traffic/real-time, I would probably use the sflows to confirm what the report
+%is saying due to the additional information we might find there.
+
+%> Are there other takedowns or other events we can investigate?
+%Yes, there seemed to be more arrests in May 2023 linked to the same takedown of
+%December 2022:
+%https://arstechnica.com/information-technology/2023/05/feds-seize-13-more-ddos-for-hire-platforms-in-ongoing-international-crackdown/
+%It also seems like there is a team of people behind this working with the FBI:
+%https://www.wired.com/story/big-pipes-ddos-for-hire-fbi/
+
+
